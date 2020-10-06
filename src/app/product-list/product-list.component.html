@@ -1,0 +1,14 @@
+<h2>Products</h2>
+<div *ngFor="let product of products">
+  {{product.name}}
+  {{product.Styles[0].name}}
+  <a [title]="product.name" [routerLink]="['/products', product.id]">
+  <img src="{{'https://cdn.inksoft.com' + product.Styles[0].imageFilePath_Front}}">
+  </a>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
