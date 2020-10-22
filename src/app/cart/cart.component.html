@@ -1,6 +1,6 @@
 <div  *ngIf="cart?.cart?.items?.length">
     <div *ngFor="let item of cart.cart.items">
-        <img src="https://localhost{{item.sidePreviews[0].designOnProductUrl}}" />
+        <img src="https://cdn.inksoft.com{{item.sidePreviews[0].designOnProductUrl}}" />
         <div>{{item.quantity}} - {{item.fullName}}</div>
         <div><a [routerLink]="['/products', item.productId, item.productStyleId, item.designId, sessionToken]">Edit</a></div>
     </div>
