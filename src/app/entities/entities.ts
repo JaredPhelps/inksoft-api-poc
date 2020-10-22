@@ -32,6 +32,65 @@ export interface ProductStyleSize {
   name: string;
 }
 
+export interface ShoppingCartPackage {
+  cart: ShoppingCart;
+  products: ProductBase[];
+}
+
+export interface ShoppingCart {
+  totalDue: number;
+  shippingAmount: number;
+  itemTotal: number;
+  items: ShoppingCartItem[];
+  sessionToken: string;
+  designSummaries: DesignSummary[];
+}
+
+export interface ShoppingCartItem {
+  designId: number;
+  productId: number;
+  productStyleId: number;
+  productStyleSizeId: number;
+  quantity: number;
+  fullName: string;
+  sidePreviews: ShoppingCartItemPreview[];
+}
+
+export interface ShoppingCartItemPreview {
+  sideName: string;
+  productOnlyUrl: string;
+  designOnlyUrl: string;
+  designOnProductUrl: string;
+  sideArtId: number;
+}
+
+export interface DesignSummary {
+  canvases: CanvasSummary[];
+  designID: number;
+  name: string;
+  designedOnProductId?: number;
+  designedOnProductStyleId?: number;
+  designedOnSku?: string;
+  designedOnStyleName?: string;
+  lastModified?: Date;
+  notes?: string;
+  uri?: string;
+}
+
+export interface CanvasSummary {
+  colors: string[];
+  isFullColor: boolean;
+  matchFileColor: boolean;
+  pngRelativeUrl: string;
+  pngRelativeUrlWithProduct: string;
+  printRegion: string;
+  sideDisplayName: string;
+  sideName: string;
+  svgRelativeUrl: string;
+  thumbnailRelativeUrl: string;
+  numColors?: number;
+}
+
 export interface ApiResponseType<T> {
   ok: boolean;
   data: T;

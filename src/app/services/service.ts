@@ -1,32 +1,44 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { catchError, map } from 'rxjs/operators';
-import { ProductBase, ApiResponseType, ApiResponse } from "../entities/entities";
-import { throwError as observableThrowError, Observable } from 'rxjs';
+import {HttpClient} from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {catchError, map} from 'rxjs/operators';
+import {ProductBase, ApiResponseType, ApiResponse, ShoppingCartPackage} from "../entities/entities";
+import {throwError as observableThrowError, Observable} from 'rxjs';
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class Service {
-  constructor(private http: HttpClient) {}
+    // In a real-life app you'd get this from a call to GetOrCreateSessionWithApiKey on the server-side.
+    public sessionToken: string = '89F64779-B857-4B05-A007-9A981CE951B1';
 
-  getProducts(): Observable<ApiResponseType<ProductBase[]>> {
-      return this.get('https://qa.inksoft.com/DS509063609/Api2/GetProductBaseList?IncludePrices=true&IncludeSizes=true&Predecorated=false&format=JSONCamelCase')
-      .pipe();
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  getProduct(productId: number): Observable<ApiResponseType<ProductBase>> {
-      return this.get('https://qa.inksoft.com/DS509063609/Api2/GetProductBaseList?IncludePrices=true&IncludeSizes=true&Predecorated=false&format=JSONCamelCase&ProductIds=[' + productId + ']')
-      .pipe();
-  }
+    getProducts(): Observable<ApiResponseType<ProductBase[]>> {
+        return this.get('https://' + environment.apiDomain + '/DS509063609/Api2/GetProductBaseList?IncludePrices=true&IncludeSizes=true&Predecorated=false&format=JSONCamelCase')
+            .pipe();
+    }
 
-  get(url: string): Observable<ApiResponse> {
-      return this.http.get(url)
-      .pipe(
-        map((res: ApiResponse) => res),
-        catchError(this.handleError)
-      );;
-  }
+    getProduct(productId: number): Observable<ApiResponseType<ProductBase>> {
+        return this.get('https://' + environment.apiDomain + '/DS509063609/Api2/GetProductBaseList?IncludePrices=true&IncludeSizes=true&Predecorated=false&format=JSONCamelCase&ProductIds=[' + productId + ']')
+            .pipe();
+    }
 
-  protected handleError(error: Response): Observable<never> {
-    return observableThrowError(error);
-  }
+    getCartPackage(sessionToken: string): Observable<ApiResponseType<ShoppingCartPackage>> {
+        return this.get('https://' + environment.apiDomain + '/DS509063609/Api2/GetCartPackage?SessionToken=' + sessionToken + '&format=JSONCamelCase')
+            .pipe();
+    }
+
+
+    get(url: string): Observable<ApiResponse> {
+        return this.http.get(url)
+            .pipe(
+                map((res: ApiResponse) => res),
+                catchError(this.handleError)
+            );
+        ;
+    }
+
+    protected handleError(error: Response): Observable<never> {
+        return observableThrowError(error);
+    }
 }

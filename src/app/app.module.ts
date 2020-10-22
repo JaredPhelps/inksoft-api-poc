@@ -10,6 +10,7 @@ import { Service } from './services/service';
 import { HttpClientModule } from '@angular/common/http';
 import { DesignStudioComponent } from './design-studio/design-studio.component';
 import { ScriptHackComponent } from './script-hack/script-hack.component';
+import {CartComponent} from "./cart/cart.component";
 
 @NgModule({
   imports: [
@@ -18,8 +19,9 @@ import { ScriptHackComponent } from './script-hack/script-hack.component';
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: ProductListComponent },
-      { path: 'products/:productId', component: DesignStudioComponent }
-      { path: 'cart/:productId/:designId/:sessionToken', component: DesignStudioComponent }
+      { path: 'products/:productId/:productStyleId/:designId/:sessionToken', component: DesignStudioComponent },
+      { path: 'products/:productId', component: DesignStudioComponent },
+      { path: 'cart/:sessionToken', component: CartComponent }
     ])
   ],
   declarations: [
@@ -27,6 +29,7 @@ import { ScriptHackComponent } from './script-hack/script-hack.component';
     TopBarComponent,
     ProductListComponent,
     DesignStudioComponent,
+    CartComponent,
     ScriptHackComponent
   ],
   providers: [

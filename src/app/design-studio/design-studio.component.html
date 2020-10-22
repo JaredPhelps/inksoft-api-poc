@@ -1,7 +1,7 @@
-<div class="embed-container" *ngIf="product?.id">
+<div class="embed-container" *ngIf="product?.id" style="width:100%">
           <div id="inksoftEmbed" style="width: 100%; height: 720px; padding: 0; margin: 0; border: 0; max-height: 100%; width: 100%;"></div>
       </div>
-      <script-hack>
+      <script-hack *ngIf="product?.id">
         (function() {{'{'}}
           function init() {{'{'}}
             var scriptElement = document.createElement('script');
@@ -16,15 +16,19 @@
           function launchDesignStudio() {{'{'}}
             window.inksoftApi.launchEmbeddedDesignStudio({{'{'}}
               targetElementId: 'inksoftEmbed',
-              domain: 'https://stores.inksoft.com',
+              domain: '{{'https://' + apiDomain}}',
               cdnDomain: 'https://cdn.inksoft.com',
               storeUri: 'DS509063609',
-              productId: {{product.id || 'null'}},
+              productId: {{product?.id || 'null'}},
+              productStyleId: {{productStyleId || 'null'}},
               designId: {{designId || 'null'}},
               updateCart: {{updateCart || 'false'}},
-              sessionToken: {{sessionToken || 'null'}},
-              onCartTriggered: function(cart) {{'{'}}
-                location.href = '/cart/' + cart.sessionToken
+              sessionToken: '{{sessionToken}}',
+              cartId: {{updateCart ? 1 : 0}},
+              disableLeavePrompt: true,
+              disableChangeProduct: true,
+              {{updateCart ? 'onDesignSaved' : 'onCartTriggered'}}: function(cart) {{'{'}}
+                location.href = '/cart/{{sessionToken}}'
               }
             });
           }
