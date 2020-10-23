@@ -27,7 +27,7 @@
               cartId: {{updateCart ? 1 : 0}},
               disableLeavePrompt: true,
               disableChangeProduct: true,
-              {{updateCart ? 'onDesignSaved' : 'onCartTriggered'}}: function(cart) {{'{'}}
+              onCartTriggered: function(cart) {{'{'}}
                 location.href = '/cart/{{sessionToken}}'
               }
             });
