@@ -1,5 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  apiDomain: 'qa.inksoft.com'
 };
 
 

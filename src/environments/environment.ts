@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiDomain: 'localhost'
+  apiDomain: 'qa.inksoft.com'
 };
 
 /*

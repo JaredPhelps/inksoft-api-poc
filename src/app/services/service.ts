@@ -8,7 +8,7 @@ import {environment} from "../../environments/environment";
 @Injectable()
 export class Service {
     // In a real-life app you'd get this from a call to GetOrCreateSessionWithApiKey on the server-side.
-    public sessionToken: string = '89F64779-B857-4B05-A007-9A981CE951B1';
+    public sessionToken: string = 'D1A70F7C-9F69-4535-8E56-5D0314BEA0DF';
 
     constructor(private http: HttpClient) {
     }

@@ -9,9 +9,10 @@ import { Service } from '../services/service';
 })
 export class ProductListComponent implements OnInit {
   products: ProductBase[];
+  public sessionToken: string;
 
   constructor(private service: Service) {
-
+    this.sessionToken = service.sessionToken;
   }
 
   ngOnInit() {
@@ -19,6 +20,10 @@ export class ProductListComponent implements OnInit {
     .subscribe((response: ApiResponseType<ProductBase[]>) => {
       this.products = response.data;
     });
+  }
+
+  setSessionToken(newToken: string) {
+    this.service.sessionToken = newToken;
   }
 
   share() {
